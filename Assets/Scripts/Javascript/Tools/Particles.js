@@ -2,7 +2,7 @@ function Particles(position,velocity,color)
 {
 	this.position = position;
 	this.velocity = velocity;
-	this.color = Math.Random.ColorRGB();
+	this.color = /*Math.Random.ColorRGB()*/ "white";
 	this.acceleration = new Vector(0,0);
 }
 

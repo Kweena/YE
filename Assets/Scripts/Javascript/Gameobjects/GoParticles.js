@@ -244,8 +244,8 @@ function ParticlesSysteme() {
 			this.Transform.size.y = 171;
 			this.Renderer.Material.Source = Images["sujet"];*/
 
-			this.emitters.push(new Emitter(this.Transform.position, new Vector(2,2), 10, 1, 4000));
-			this.fields.push(new Field(new Vector(canvas.width * .5, canvas.height * .5),10));
+			this.emitters.push(new Emitter(this.Transform.position, new Vector(2,2), 10, 20, 20000));
+			//this.fields.push(new Field(new Vector(canvas.width * .5, canvas.height * .5),50));
 			console.log(this.fields)
 			this.started = true;
 			console.log('%c System:GameObject ' + this.name + " Started !", 'background:#222; color:#bada55');
