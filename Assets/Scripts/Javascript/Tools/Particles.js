@@ -2,21 +2,22 @@ function Particles(position,velocity,color)
 {
 	this.position = position;
 	this.velocity = velocity;
-	this.color = color;
+	this.color = Math.Random.ColorRGB();
 	this.acceleration = new Vector(0,0);
 }
 
 Particles.prototype.update = function()
-{
+{	
+	this.submitToField();
 	this.position.add(this.velocity);
 	this.velocity.add(this.acceleration);
-	this.submitToField(Application.LoadedScene.GameObjects[0]);
+
 }
 
 Particles.prototype.render = function()
 {
 	ctx.fillStyle = this.color;
-	ctx.fillRect(this.position.x,this.position.y, 1,1);
+	ctx.fillRect(this.position.x,this.position.y, 2,2);
 }
 
 Particles.prototype.outOfBounds = function()
@@ -34,20 +35,21 @@ Particles.prototype.outOfBounds = function()
 
 Particles.prototype.submitToField = function(fields)
 {
-	 var Acceleration = new Vector();
+	 //var Acceleration = new Vector();
 
-	 for (var i = 0; i < fields.length; i++) 
+	 for (var i = 0; i < Application.LoadedScene.GameObjects[0].fields.length; i++) 
 	 {
-	 	var field = fields[i];
+	 	var field = Application.LoadedScene.GameObjects[0].fields[i];
 	 	var vector = new Vector();
 
 	 	vector.x = field.position.x - this.position.x;  	
 	 	vector.y = field.position.y - this.position.y; 
 
 	 	var strength = field.mass / vector.lengthSq();
+	 	this.acceleration = vector.mul(strength);
 
-	 	Acceleration = vector.mul(strength);
+	 	//Acceleration = vector.mul(strength);
 	 }  
 
-	 this.acceleration = Acceleration;
+	 //this.acceleration = Acceleration;
 }

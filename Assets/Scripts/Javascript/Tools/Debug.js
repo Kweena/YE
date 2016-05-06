@@ -59,7 +59,7 @@ var Debug = {
 	mousePosition : function() {
 		ctx.font = '10px Arial';
 		if (Input.MouseClick) {
-			ctx.fillStyle = '#65C065';
+			ctx.fillStyle = '#black';
 		}else {
 			ctx.fillStyle = 'white';
 		}

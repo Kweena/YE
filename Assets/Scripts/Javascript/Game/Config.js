@@ -8,7 +8,7 @@ gravity.y = -9.81;
 var Application = {
 	LoadedScene: null,
 	GamePaused: false,
-	debugMode: true
+	debugMode: false
 };
 
 var ImagesLoaded = 0;

@@ -66,8 +66,8 @@ function ParticlesScene() {
 	}
 	this.Update = function() {
 		if (!Application.GamePaused) {
-/*			ctx.fillStyle = '#5F71A5';
-			ctx.fillRect(0, 0, canvas.width, canvas.height);*/
+			ctx.fillStyle = 'black';
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			for (var i = 0; i < this.GameObjects.length; i++) {
 				this.GameObjects[i].Start();
 				//this.emitters[i].update();

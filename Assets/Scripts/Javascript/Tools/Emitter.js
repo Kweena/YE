@@ -5,7 +5,7 @@ function Emitter(position,velocity,spread,rate,max)
 	this.position = position || new Vector(); //position
 	this.velocity = velocity || new Vector(); // accelleration
 	this.spread = spread || Math.PI / 32; //angle possible
-	this.color = "red"; //couleur des particule
+	this.color = Math.Random.ColorRGB(); //couleur des particule
 	this.rate = rate || 5; // nbr de particule a la frame
 	this.particlesMax = max || 20000;
 	this.rnd = 0;
@@ -18,8 +18,8 @@ Emitter.prototype.emitParticles = function()
 	{
 		if (this.particles.length < this.particlesMax)
 		{
-			var angle = this.velocity.getAngle() + this.spread - (Math.random() * this.spread * 2) + ++ this.rnd;
-			var position = new Vector(this.position.x, this.position.y);
+			var angle = this.velocity.getAngle() + this.spread /*- (Math.random() * this.spread * 2) + ++ this.rnd*/;
+			var position = new Vector(this.position.x + 10 * Math.random(), this.position.y + 10 * Math.random());
 			var velocity = this.velocity.fromAngle(angle); 
 
 			this.particles.push(new Particles(position,velocity,this.color));

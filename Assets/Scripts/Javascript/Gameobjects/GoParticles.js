@@ -146,7 +146,7 @@ function ParticlesSysteme() {
 	this.Transform.position = new Vector();
 	this.Transform.size = new Vector();
 	this.Transform.scale = new Vector(1,1);
-	this.Transform.pivot = new Vector(0.5,0.5);
+	this.Transform.pivot = new Vector(0,0);
 	this.Transform.angle = 0;
 
 	this.Physics = {};
@@ -237,17 +237,16 @@ function ParticlesSysteme() {
 	this.Start = function() {
 		if (!this.started) {
 			// operation start
-			this.Transform.position.x = 200;
-			this.Transform.position.y = 200;
+			this.Transform.position.x = canvas.width * .5;
+			this.Transform.position.y = canvas.height * .5;
 
 /*			this.Transform.size.x = 100;
 			this.Transform.size.y = 171;
 			this.Renderer.Material.Source = Images["sujet"];*/
 
-			this.emitters.push(new Emitter(new Vector( 600,480),new Vector (2,2), 10, 10, 200000));
-			this.fields.push(new Field(new Vector (800,580), -40));
-			console.log(this.fields);
-
+			this.emitters.push(new Emitter(this.Transform.position, new Vector(2,2), 10, 1, 4000));
+			this.fields.push(new Field(new Vector(canvas.width * .5, canvas.height * .5),10));
+			console.log(this.fields)
 			this.started = true;
 			console.log('%c System:GameObject ' + this.name + " Started !", 'background:#222; color:#bada55');
 		}
@@ -260,6 +259,23 @@ function ParticlesSysteme() {
 			for (var i = 0; i < this.emitters.length; i++) 
 			{
 				this.emitters[i].update();
+				if (Application.debugMode) 
+				{
+					ctx.fillStyle = "green";
+					ctx.fillRect(this.emitters[i].position.x, this.emitters[i].position.y, 7,7);
+					ctx.fillText(this.emitters[i].particles.length + "/" + this.emitters[i].particlesMax, this.emitters[i].position.x, this.emitters[i].position.y - 10)
+				}
+				
+			}
+
+			for (var i = 0; i < this.fields.length; i++) {
+				// this.emitters[i].position = Input.MousePosition; 
+				if (Application.debugMode) 
+				{
+					ctx.fillStyle = "red";
+					ctx.fillRect(this.fields[i].position.x, this.fields[i].position.y, 7,7);
+				}
+				
 			}
 		}
 			//console.log("Angle : "+angle);
