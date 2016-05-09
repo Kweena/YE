@@ -42,34 +42,44 @@ Gfx = {
 			ctx.putImageData(pixels, affectedZone.x, affectedZone.y);
 		},
 
-		White2transparent : function(affectedZone,img)
+		// White2transparent : function(affectedZone,img)
+		// {
+			
+		// 	ctx.drawImage(Images["Mask"],0,0,canvas.width,canvas.height);
+		// 	var pixels = ctx.getImageData(affectedZone.x, affectedZone.y, affectedZone.w, affectedZone.h);
+		// 	var d = pixels.data;
+
+		//     var r=0, g=1, b=2,a=3;
+
+		//     for (var i = 0; i < d.length; i += 4)
+		//     {
+		//       	if 
+		//       	(
+	 //            	d[i+r] > 250 &&
+	 //            	d[i+g] > 250 &&
+	 //            	d[i+b] > 250) // if white then change alpha to 0
+		  		
+		//       	{
+		//       		d[i+a] = 0;
+		//       	}
+		//     }
+
+		//     fillStyle = "blue";
+		// 	ctx.fillRect(0,0,canvas.width,canvas.height);
+		//     ctx.putImageData(pixels, affectedZone.x, affectedZone.y);
+
+		// },
+
+		Flash : function(affectedZone,power,color)
 		{
 			
-			ctx.drawImage(Images["Mask"],0,0,canvas.width,canvas.height);
-			var pixels = ctx.getImageData(affectedZone.x, affectedZone.y, affectedZone.w, affectedZone.h);
-			var d = pixels.data;
+			ctx.save();
 
-		    var r=0, g=1, b=2,a=3;
+			ctx.fillStyle = color;
+			ctx.fillRect(affectedZone.x, affectedZone.y, affectedZone.w, affectedZone.h);
 
-		    for (var i = 0; i < d.length; i += 4)
-		    {
-		      	if 
-		      	(
-	            	d[i+r] > 250 &&
-	            	d[i+g] > 250 &&
-	            	d[i+b] > 250) // if white then change alpha to 0
-		  		
-		      	{
-		      		d[i+a] = 0;
-		      	}
-		    }
-
-		    fillStyle = "blue";
-			ctx.fillRect(0,0,canvas.width,canvas.height);
-		    ctx.putImageData(pixels, affectedZone.x, affectedZone.y);
+			ctx.restore();
 
 		}
-
-
 	}
 };

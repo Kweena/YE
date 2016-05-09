@@ -42,6 +42,8 @@
 function SceneTest() {
 	this.name = "SceneTest";
 	this.GameObjects =[];
+	this.count = 0;
+	this.power = 15;
 
 	this.started = false;
 
@@ -74,14 +76,21 @@ function SceneTest() {
 				this.GameObjects[i].Start();
 			}
 
-			var affectedZone = {
+
+			if (this.count % this.power == 0) 
+			{
+				var affectedZone = {
 				x : 0,
 				y : 0,
 				w : canvas.width,
 				h : canvas.height
 			};
 
-			//Gfx.Filter.White2transparent(affectedZone,Images["Mask"]);
+			Gfx.Filter.Flash(affectedZone,1,"white");
+
+			}
+			
+			this.count ++;
 		}
 		this.GUI();
 	}

@@ -138,6 +138,12 @@ function GoCible() {
 	this.enabled = true;
 	this.started = false;
 	this.rendered = true;
+
+	this.walkSpeed = 5;
+	this.goalSpeed = new Vector(0,0);
+	// this.goalSpeed.x = 0;
+	// this.goalSpeed.y = 0
+	this.currentSpeed = new Vector(0,0);
 	
 	this.Transform = {};
 	this.Transform.position = new Vector();
@@ -246,30 +252,70 @@ function GoCible() {
 		}
 		this.Update();
 	};
-	this.Update = function() {
+
+	this.Update = function() 
+	{
+		if (Input.KeysDown[39]) 
+		{
+			this.goalSpeed.x = this.walkSpeed;
+			// this.Transform.position.x += this.speed;
+		}
+		else
+		{
+			this.goalSpeed.x = 0;
+		} 
+		
+		if (Input.KeysDown[38]) 
+		{
+			this.goalSpeed.y = -this.walkSpeed;
+			// this.Transform.position.y -= this.speed;
+		}
+		else
+		{
+			this.goalSpeed.y = 0;
+		} 
+
+		if (Input.KeysDown[37]) 
+		{
+			this.goalSpeed.x = -this.walkSpeed;
+			// this.Transform.position.x -= this.speed;
+		}
+		else
+		{
+			if (!Input.KeysDown[39]) 
+			{
+				this.goalSpeed.x = 0;
+			}
+			
+		} 
+		
+		if (Input.KeysDown[40]) 
+		{
+			this.goalSpeed.y = this.walkSpeed;
+			// this.Transform.position.y += this.speed;
+		}
+		else
+		{
+			if (!Input.KeysDown[38]) 
+			{
+				this.goalSpeed.y = 0;
+			}
+
+		} 
+
 		if ( this.enabled ) 
 		{
 			this.Renderer.Draw();
-			if (Input.KeysDown[39]) 
-			{
-				this.Transform.position.x += 5;
-			}
-			if (Input.KeysDown[38]) 
-			{
-				this.Transform.position.y -= 5;
-			}
-			if (Input.KeysDown[37]) 
-			{
-				this.Transform.position.x -= 5;
-			}
-			if (Input.KeysDown[40]) 
-			{
-				this.Transform.position.y += 5;
-			}
-
 		}
+
+		this.currentSpeed.x = Tween.Linear(this.goalSpeed.x,this.currentSpeed.x,Time.DeltaTime,1);
+		this.Transform.position.x += this.currentSpeed.x;
+
+		this.currentSpeed.y = Tween.Linear(this.goalSpeed.y,this.currentSpeed.y,Time.DeltaTime,1);
+		this.Transform.position.y += this.currentSpeed.y;
 		this.GUI();	
 	};
+
 	this.GUI = function() {
 		
 	}
