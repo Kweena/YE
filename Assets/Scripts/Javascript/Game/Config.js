@@ -16,6 +16,11 @@ var WalkableTiles = [];
 
 var ImagesPath = [
 	// { name:"monImage",path: "background/image.png"},
-	{name : "sujet", path : "Boy.png"}
+	{name : "sujet", path : "Boy.png"},
+	{name : "sujet1", path : "Character Cat Girl.png"},
+	{name : "sujet2", path : "Character Horn Girl.png"},
+	{name : "Mask", path : "mask.png"},
+	{name : "cible", path : "Enemy Bug.png"}
+
 ];
 var Images = {};

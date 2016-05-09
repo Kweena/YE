@@ -133,8 +133,8 @@
 *	Add NameOfYourGameObject.Start() in your scene.
 */
 
-function GoTest() {
-	this.name = "GoTest";
+function GoCible() {
+	this.name = "GoCible";
 	this.enabled = true;
 	this.started = false;
 	this.rendered = true;
@@ -234,12 +234,12 @@ function GoTest() {
 	this.Start = function() {
 		if (!this.started) {
 			// operation start
-			this.Transform.position.x = 100;
-			this.Transform.position.y = 50;
+			this.Transform.position.x = canvas.width/2;
+			this.Transform.position.y = canvas.height/2;
 
-			this.Transform.size.x = 100;
-			this.Transform.size.y = 171;
-			this.Renderer.Material.Source = Images["sujet"];
+			this.Transform.size.x = 50;
+			this.Transform.size.y = 86;
+			this.Renderer.Material.Source = Images["cible"];
 
 			this.started = true;
 			console.log('%c System:GameObject ' + this.name + " Started !", 'background:#222; color:#bada55');
@@ -250,6 +250,22 @@ function GoTest() {
 		if ( this.enabled ) 
 		{
 			this.Renderer.Draw();
+			if (Input.KeysDown[39]) 
+			{
+				this.Transform.position.x += 5;
+			}
+			if (Input.KeysDown[38]) 
+			{
+				this.Transform.position.y -= 5;
+			}
+			if (Input.KeysDown[37]) 
+			{
+				this.Transform.position.x -= 5;
+			}
+			if (Input.KeysDown[40]) 
+			{
+				this.Transform.position.y += 5;
+			}
 
 		}
 		this.GUI();	

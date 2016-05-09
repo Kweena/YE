@@ -133,8 +133,8 @@
 *	Add NameOfYourGameObject.Start() in your scene.
 */
 
-function GoTest() {
-	this.name = "GoTest";
+function GoTest1() {
+	this.name = "GoTest1";
 	this.enabled = true;
 	this.started = false;
 	this.rendered = true;
@@ -234,12 +234,12 @@ function GoTest() {
 	this.Start = function() {
 		if (!this.started) {
 			// operation start
-			this.Transform.position.x = 100;
-			this.Transform.position.y = 50;
+			this.Transform.position.x = 900;
+			this.Transform.position.y = 100;
 
 			this.Transform.size.x = 100;
 			this.Transform.size.y = 171;
-			this.Renderer.Material.Source = Images["sujet"];
+			this.Renderer.Material.Source = Images["sujet1"];
 
 			this.started = true;
 			console.log('%c System:GameObject ' + this.name + " Started !", 'background:#222; color:#bada55');
@@ -250,7 +250,7 @@ function GoTest() {
 		if ( this.enabled ) 
 		{
 			this.Renderer.Draw();
-
+	
 		}
 		this.GUI();	
 	};

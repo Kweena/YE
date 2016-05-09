@@ -56,6 +56,9 @@ function SceneTest() {
 			// operation start
 
 			this.GameObjects.push(new GoTest());
+			this.GameObjects.push(new GoTest1());
+			this.GameObjects.push(new GoTest2());
+			this.GameObjects.push(new GoCible());
 			
 			this.started = true;
 			console.log('%c System:Scene ' + this.name + " Started !", 'background:#222; color:#bada55');
@@ -70,6 +73,15 @@ function SceneTest() {
 			for (var i = 0; i < this.GameObjects.length; i++) {
 				this.GameObjects[i].Start();
 			}
+
+			var affectedZone = {
+				x : 0,
+				y : 0,
+				w : canvas.width,
+				h : canvas.height
+			};
+
+			//Gfx.Filter.White2transparent(affectedZone,Images["Mask"]);
 		}
 		this.GUI();
 	}

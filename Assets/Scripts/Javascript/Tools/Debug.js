@@ -63,6 +63,7 @@ var Debug = {
 		}else {
 			ctx.fillStyle = 'white';
 		}
+		//ctx.getImageData(Input.MousePosition.x,Input.MousePosition.y, 1,1);
 		ctx.fillText(Input.MousePosition.x+" "+Input.MousePosition.y, Input.MousePosition.x-10, Input.MousePosition.y-2);
 	},
 	showTime : function() {
