@@ -1,4 +1,4 @@
-layerPrefs = 
+PlayerPrefs = 
 {
 	//solution : localStorage
 

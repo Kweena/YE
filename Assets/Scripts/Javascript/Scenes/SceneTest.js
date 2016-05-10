@@ -79,39 +79,53 @@ function SceneTest() {
 				this.GameObjects[i].Start();
 			}
 
+			var text = "Would you tell me , please , where I have to go from here ? Much depends on where you want to go . I care not the place ... In this case, regardless of the route you will take ."
 
+			Dialogue.Begin(text,5,400,400,"white","Georgia");
 
-			//GFX
-			// if (this.count % this.power == 0) 
-			// {
-			// 	var affectedZone = {
-			// 	x : 0,
-			// 	y : 0,
-			// 	w : canvas.width,
-			// 	h : canvas.height
-			// };
+			console.log(Dialogue.interval)
+			console.clear();
 
-			// // Gfx.Filter.Flash(affectedZone,1,"white");
+			console.log(Dialogue.words)
+			console.log(Dialogue.letters)
+			this.GUI();
+		// 	//GFX
+		// 	if (this.count % this.power == 0) 
+		// 	{
+		// 		var affectedZone = {
+		// 		x : 0,
+		// 		y : 0,
+		// 		w : canvas.width,
+		// 		h : canvas.height
+		// 		};
 
-			// }
+		// 		Gfx.Filter.Flash(affectedZone,1,"white");
+
+		// 	}
 			
-			// this.count ++;
-		}
-		
-
-		this.GUI();
+		// 	this.count ++;
+		// }
 	}
-
-	this.GUI = function() {
-		if (!Application.GamePaused) {
-			//Show UI
-			ctx.font ='20px Arial';
-			ctx.fillStyle = 'black';
-			Dialogue.InitText();
-		} else {
+}
+	this.GUI = function() 
+	{
+		if (!Application.GamePaused) 
+		{
+			if (Dialogue.finished) 
+			{
+				Dialogue.interrupted = false;
+			}	
+			else
+			{
+				Dialogue.Continue();
+			}	
+		} 
+		else 
+		{
 			// Show pause menu
 		}
 	}
 
-	this.Awake()
+	this.Awake();
+
 }

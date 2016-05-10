@@ -3,7 +3,7 @@ function Run(argument) {
 	Time.SetTimeValues();
 		// canvas.width = window.innerWidth;
 		// canvas.height = window.innerHeight;
-	//ctx.clearRect(0,0,canvas.width,canvas.height);
+	ctx.clearRect(0,0,canvas.width,canvas.height);
 	ctx.fillStyle = "rgba(0,0,0,0.6)";
 	// ctx.fillRect(0,0,canvas.width, canvas.height);
 	//console.log('working');
