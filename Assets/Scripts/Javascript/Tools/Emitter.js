@@ -5,7 +5,7 @@ function Emitter(position,velocity,spread,rate,max)
 	this.position = position || new Vector(); //position
 	this.velocity = velocity || new Vector(); // accelleration
 	this.spread = spread || Math.PI / 32; //angle possible
-	this.color = /*Math.Random.ColorRGB()*/ "white"; //couleur des particule
+	this.color = Math.Random.ColorRGB() /*"white"*/; //couleur des particule
 	this.rate = rate || 5; // nbr de particule a la frame
 	this.particlesMax = max || 20000;
 	this.rnd = 0;
