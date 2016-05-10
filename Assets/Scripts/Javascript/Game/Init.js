@@ -51,8 +51,12 @@ function LoadImages() {
 function ImageLoaded(imageLoaded) {
 	console.log('%c System: ' + imageLoaded + " Loaded !", 'background:#222; color:#10ADED');
 				// Here? for wait the download of loader
+				console.log(Application.LoadedScene);
 	Scenes["SceneTest"] = new SceneTest();
 	Application.LoadedScene = Scenes["SceneTest"];
+				console.log(Application.LoadedScene);
+	
+
 	
 }
 

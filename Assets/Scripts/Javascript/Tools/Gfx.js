@@ -78,7 +78,7 @@ Gfx = {
 			ctx.fillStyle = color;
 			ctx.fillRect(affectedZone.x, affectedZone.y, affectedZone.w, affectedZone.h);
 
-			ctx.restore();
+			// ctx.restore();
 
 		}
 	}

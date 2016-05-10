@@ -61,7 +61,9 @@ function SceneTest() {
 			this.GameObjects.push(new GoTest1());
 			this.GameObjects.push(new GoTest2());
 			this.GameObjects.push(new GoCible());
+
 			
+
 			this.started = true;
 			console.log('%c System:Scene ' + this.name + " Started !", 'background:#222; color:#bada55');
 			Time.SetTimeWhenSceneLoaded();
@@ -70,6 +72,7 @@ function SceneTest() {
 	}
 	this.Update = function() {
 		if (!Application.GamePaused) {
+
 			ctx.fillStyle = '#5F71A5';
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			for (var i = 0; i < this.GameObjects.length; i++) {
@@ -77,26 +80,34 @@ function SceneTest() {
 			}
 
 
-			if (this.count % this.power == 0) 
-			{
-				var affectedZone = {
-				x : 0,
-				y : 0,
-				w : canvas.width,
-				h : canvas.height
-			};
 
-			Gfx.Filter.Flash(affectedZone,1,"white");
+			//GFX
+			// if (this.count % this.power == 0) 
+			// {
+			// 	var affectedZone = {
+			// 	x : 0,
+			// 	y : 0,
+			// 	w : canvas.width,
+			// 	h : canvas.height
+			// };
 
-			}
+			// // Gfx.Filter.Flash(affectedZone,1,"white");
+
+			// }
 			
-			this.count ++;
+			// this.count ++;
 		}
+		
+
 		this.GUI();
 	}
+
 	this.GUI = function() {
 		if (!Application.GamePaused) {
 			//Show UI
+			ctx.font ='20px Arial';
+			ctx.fillStyle = 'black';
+			Dialogue.InitText();
 		} else {
 			// Show pause menu
 		}

@@ -1,6 +1,6 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
-
+// canvas.style.background = 'red';
 var Scenes = {};
 var gravity = new Vector();
 gravity.y = -9.81;
