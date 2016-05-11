@@ -39,52 +39,72 @@
 *
 *	To load your scene, use this instruction: "Application.LoadLevel(LevelName)".
 */
-function Loader() {
-	this.name = "Loader";
+function StateScene() {
+	this.name = "StateScene";
 	this.GameObjects =[];
+	this.count = 0;
+	this.power = 15;
 
 	this.started = false;
-	this.imageLoaded = 0;
-	this.logo = new Image();
-	this.logo.src = "Assets/Graphics/Logos/logo_technobel.png";
 
 	this.Awake = function() {
-		//console.clear();
+		// console.clear();
 		console.log('%c System:Scene ' + this.name + " Created !", 'background:#222; color:#bada55');
+
 	}
-	
+
 	this.Start = function() {
 		if (!this.started) {
-			Time.SetTimeWhenGameBegin();
+			Time.SetTimeWhenSceneBegin();
 			// operation start
-			LoadImages();
+
+			// this.GameObjects.push(new GoTest());
+			// this.GameObjects.push(new GoTest1());
+			// this.GameObjects.push(new GoTest2());
+			// this.GameObjects.push(new GoCible());
+
+			
+
 			this.started = true;
 			console.log('%c System:Scene ' + this.name + " Started !", 'background:#222; color:#bada55');
-			Time.SetTimeWhenGameLoaded();
+			Time.SetTimeWhenSceneLoaded();
 		}
+
 		this.Update();
 	}
+
 	this.Update = function() {
-			ctx.fillStyle = "rgb(230, 230, 230)";
-			ctx.fillRect(0,0, canvas.width, canvas.height);
-			ctx.drawImage(this.logo, canvas.width * .5 - this.logo.width *.5, canvas.height *.3);
+		if (!Application.GamePaused) {
+
+			// ctx.fillStyle = '#5F71A5';
+			// ctx.fillRect(0, 0, canvas.width, canvas.height);
 			for (var i = 0; i < this.GameObjects.length; i++) {
-				//this.GameObjects[i].Start();
+				this.GameObjects[i].Start();
 			}
-		this.GUI();
+
+			StatesMachine.setState();
+
 	}
-	this.GUI = function() {
-			ctx.strokeStyle = "grey";
-			ctx.strokeRect( canvas.width / 2 - 200, 500, 400, 20);
-			ctx.fillStyle = "grey";
-			var portion = 400 / ImagesPath.length;
-			ctx.RoundedBox( canvas.width / 2 - 198, 503, this.imageLoaded * portion - 4, 15, 6);
-		if(Application.debugMode)
-		{	
-			console.log("debug")
-			Debug.debugScene();
+}
+	this.GUI = function() 
+	{
+		if (!Application.GamePaused) 
+		{
+			if (Dialogue.finished) 
+			{
+				Dialogue.interrupted = false;
+			}	
+			else
+			{
+				Dialogue.Continue();
+			}	
+		} 
+		else 
+		{
+			// Show pause menu
 		}
 	}
 
 	this.Awake();
+
 }
