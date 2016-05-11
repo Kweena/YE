@@ -83,6 +83,10 @@ function StateScene() {
 			}
 
 			StatesMachine.setState();
+			if(Input.KeysDown[39])
+			{
+				StatesMachine.currentState = 'Recherche';
+			}
 
 	}
 }

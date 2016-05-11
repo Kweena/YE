@@ -39,16 +39,16 @@
 *
 *	To load your scene, use this instruction: "Application.LoadLevel(LevelName)".
 */
-function SceneTest() {
-	this.name = "SceneTest";
+function GridScene() {
+	this.name = "GridScene";
 	this.GameObjects =[];
-	this.count = 0;
-	this.power = 15;
+	this.position = Input.mousemove;
+	this.obstacles = new Array(49);
 
 	this.started = false;
 
 	this.Awake = function() {
-		// console.clear();
+		console.clear();
 		console.log('%c System:Scene ' + this.name + " Created !", 'background:#222; color:#bada55');
 
 	}
@@ -56,77 +56,72 @@ function SceneTest() {
 		if (!this.started) {
 			Time.SetTimeWhenSceneBegin();
 			// operation start
+			this.started = true;
 
-			this.GameObjects.push(new GoTest());
-			this.GameObjects.push(new GoTest1());
-			this.GameObjects.push(new GoTest2());
-			this.GameObjects.push(new GoCible());
-
+			for (var i = 0; i < this.obstacles.length; i++) {
+				this.obstacles[i] = Math.Random.RangeInt(1,4,true);
+			}
 			
 
-			this.started = true;
+			
+			
 			console.log('%c System:Scene ' + this.name + " Started !", 'background:#222; color:#bada55');
 			Time.SetTimeWhenSceneLoaded();
 		}
 		this.Update();
 	}
+	
 	this.Update = function() {
 		if (!Application.GamePaused) {
-
-			ctx.fillStyle = '#5F71A5';
-			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			for (var i = 0; i < this.GameObjects.length; i++) {
-				this.GameObjects[i].Start();
+				//this.GameObjects[i].Start();
 			}
-
-			var text = "Would you tell me , please , where I have to go from here ? Much depends on where you want to go . I care not the place ... In this case, regardless of the route you will take ."
-
-			Dialogue.Begin(text,5,400,400,"white","Georgia");
-
-			console.log(Dialogue.interval)
-			console.clear();
-
-			console.log(Dialogue.words)
-			console.log(Dialogue.letters)
-			this.GUI();
-		// 	//GFX
-		// 	if (this.count % this.power == 0) 
-		// 	{
-		// 		var affectedZone = {
-		// 		x : 0,
-		// 		y : 0,
-		// 		w : canvas.width,
-		// 		h : canvas.height
-		// 		};
-
-		// 		Gfx.Filter.Flash(affectedZone,1,"white");
-
-		// 	}
 			
-		// 	this.count ++;
-		// }
+			ctx.beginPath();
+			ctx.strokeStyle = "black";
+			for (var i = 0; i <= 700; i+=100)
+			{
+				ctx.moveTo(i,0);
+				ctx.lineTo(i,700);
+				for (var j = 0; j <= 700; j+=100)
+				{
+					if (i == 0) 
+					{
+						ctx.moveTo(0,j);
+						ctx.lineTo(700,j);
+					}
+					if (this.obstacles[i / 100 + j /100 * 7] == 1 && i != 700) 
+					{
+						ctx.fillStyle = "black";
+						ctx.fillRect(i,j,100,100);
+					}
+				}	
+			}
+			
+				ctx.stroke();
+				ctx.closePath();
+
+
+				if (Input.MouseClick) 
+				{
+					console.log("Case X : " + Math.floor(Input.MousePosition.x / 100) + " Case Y : " + Math.floor(Input.MousePosition.y / 100))
+				}
+
+
+
+		}
+		this.GUI();
+		
+		
 		
 	}
-}
-	this.GUI = function() 
-	{
-		if (!Application.GamePaused) 
-		{
-			if (Dialogue.finished) 
-			{
-				Dialogue.interrupted = false;
-			}	
-			else
-			{
-				Dialogue.Continue();
-			}	
-		} 
-		else 
-		{
+	this.GUI = function() {
+		if (!Application.GamePaused) {
+			//Show UI
+		} else {
 			// Show pause menu
 		}
 	}
 
-	this.Awake();
-
+	this.Awake()
 }

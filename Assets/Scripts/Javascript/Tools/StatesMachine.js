@@ -1,57 +1,84 @@
-var StatesMachine = {
-    
-    inCombat : false,
-    inNeutral : false,
-    inPoursuite : false,
-    inRecherche : true,
-    Case : ['Neutral','Combat','Poursuite','Recherche'],
-    
-    setState : function(state = 'Neutral') {
-        if (this.Case.indexOf(state) != -1) {
-            switch (state) {
-                case 'Combat':
-                    if(!this.inRecherche){
+    var StatesMachine = {
+        
+        currentState : 'Neutral',
+        Case : ['Neutral','Combat','Poursuite','Recherche'],
+        playerCollision : false,
+        playerRepere : false,
+        playerHide : false,
+        playerFight : false,
+        playerFlee : false,
+        playerDead : false,
+        playerInWarningZone : false,
+        
+        setState : function() {
+            this.updateAction(this.currentState);
+        },
+        
+        updateAction : function(state){
+            if (this.Case.indexOf(state) != -1) {
+                switch (state) {
+                    case 'Combat':
+                        if(this.currentState != 'Recherche'){
+                            
+                            this.currentState = 'Combat';
+                            canvas.style.background = 'red';
+                            
+                            if(this.playerFlee){
+                                this.currentState = 'Poursuite';
+                            }  
+                            
+                            if(this.playerDead){
+                                this.currentState = 'Recherche';
+                            }
+                        }
                         
-                        this.inCombat = true;
-                        canvas.style.background = 'yellow';
-                        this.inNeutral = false;
-                        this.inPoursuite = false;
-                        this.inRecherche = false;   
-                    }
-                    
-                    break;
-                case 'Poursuite':
-                    if(!this.inNeutral){
+                        break;
+                    case 'Poursuite':
+                        if(this.currentState != 'Neutral'){
+                            
+                            this.currentState = 'Poursuite';
+                            canvas.style.background = 'yellow';
+                            
+                            if(this.playerFight){
+                                this.currentState = 'Combat';
+                            }
+                            
+                            if(this.playerFlee){
+                                this.currentState = 'Neutral';
+                            }
+                        }
                         
-                        this.inPoursuite = true;
-                        canvas.style.background = 'red';
-                        this.inNeutral = false;
-                        this.inCombat = false;
-                        this.inRecherche = false;
-                    }
-                    
-                    break;
-                case 'Recherche':
-                    this.inRecherche = true;
-                    canvas.style.background = 'orange';
-                    this.inNeutral = false;
-                    this.inCombat = false;
-                    this.inPoursuite = false;
-                    break;
-            
-                default:
-                    if(!this.inPoursuite && !this.inCombat){
+                        break;
+                    case 'Recherche':
+                        this.currentState = 'Recherche';
+                        canvas.style.background = 'orange';
                         
-                        this.inNeutral = true;
-                        canvas.style.background = 'lightblue';
-                        this.inRecherche = false;
-                        this.inCombat = false;
-                        this.inPoursuite = false;
-                    }
-                    
-                    break;
-            }
-        }   
+                        if(this.playerCollision){
+                            this.currentState = 'Poursuite';
+                        }
+                        if(this.playerHide){
+                            this.currentState = 'Neutral';
+                        }
+                        
+                        break;
+                
+                    default:
+                        if(this.currentState != 'Poursuite' && this.currentState != 'Combat'){
+                            
+                            this.currentState = 'Neutral';
+                            canvas.style.background = 'lightblue';
+                            if(this.playerRepere){
+                                this.currentState = 'Recherche';
+                            }
+                            
+                            if(this.playerInWarningZone){
+                                this.currentState = 'Combat';
+                            }
+                        }
+                        
+                        break;
+                }
+            }   
+        }
+        
     }
-    
-}
