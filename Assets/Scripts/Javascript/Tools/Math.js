@@ -3,7 +3,7 @@ Math.DotProduct = function(v1n,v2n) {
 	return v1n.x * v2n.x + v1n.y * v2n.y;
 }
 // Distance between two dots
-Math.Distance = function(p1,p2) {
+Math.EuclidianDistance = function(p1,p2) {
 	return Math.sqrt( (p1.x - p2.x)*(p1.x - p2.x)+(p1.y - p2.y)*(p1.y - p2.y) );
 }
 // restrict number between min and max
@@ -15,4 +15,14 @@ Math.DegreeToRadian = function(angle) {
 }
 Math.RadianToDegree = function(angle) {
 	return angle * 180 / Math.PI ;
+}
+
+Math.ManathanDist = function(start,goal)
+	{
+		return Math.abs(start.x - goal.x) + Math.abs(start.y - goal.y);
+	};
+
+Math.DiagonalDistance = function(start,goal)
+{
+	return Math.max(Math.abs(start.x - goal.x), Math.abs(start.y - goal.y));
 }

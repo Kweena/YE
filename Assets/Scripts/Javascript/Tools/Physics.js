@@ -72,9 +72,9 @@ var Physics = {
 				break;
 		}
 		//nextIndex = nextIndex.y * sizeMap.x + nextIndex.x;
-
+		// console.log(WalkableTiles)
 		for (i in WalkableTiles) {
-			if (i == map[nextIndex.y * sizeMap.x + nextIndex.x]) {
+			if (WalkableTiles[i] == map[nextIndex.y * sizeMap.x + nextIndex.x]) {
 			 	return true;
 			 } 
 		}

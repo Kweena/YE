@@ -52,6 +52,5 @@ function Vector(x,y) {
 		return new Vector(this.length() * Math.cos(angle), this.length() * Math.sin(angle));
 	};
 
-
 }
 

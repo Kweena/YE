@@ -133,7 +133,7 @@
 *	Add NameOfYourGameObject.Start() in your scene.
 */
 
-function GoTest() {
+function GoTest(x,y) {
 	this.name = "GoTest";
 	this.enabled = true;
 	this.started = false;
@@ -234,8 +234,8 @@ function GoTest() {
 	this.Start = function() {
 		if (!this.started) {
 			// operation start
-			this.Transform.position.x = 100;
-			this.Transform.position.y = 50;
+			this.Transform.position.x = x;
+			this.Transform.position.y = y;
 
 			this.Transform.size.x = 100;
 			this.Transform.size.y = 171;

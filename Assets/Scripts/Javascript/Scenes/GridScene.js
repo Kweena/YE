@@ -43,7 +43,17 @@ function GridScene() {
 	this.name = "GridScene";
 	this.GameObjects =[];
 	this.position = Input.mousemove;
-	this.obstacles = new Array(49);
+	this.obstacles = new Array(196);
+	this.map = new Array(196);
+	this.width = 700;
+	this.height = 700;
+	this.nbCol = 700 / 50;
+	this.nbline = 700 / 50;
+	this.sizeCell = new Vector();
+	this.sizeCell.x = 50;
+	this.sizeCell.y = 50;
+	this.startPoint = 0;
+	this.endPoint = 650;
 
 	this.started = false;
 
@@ -58,61 +68,90 @@ function GridScene() {
 			// operation start
 			this.started = true;
 
+
 			for (var i = 0; i < this.obstacles.length; i++) {
 				this.obstacles[i] = Math.Random.RangeInt(1,4,true);
 			}
-			
-
-			
-			
+			WalkableTiles = [2,3,4];
 			console.log('%c System:Scene ' + this.name + " Started !", 'background:#222; color:#bada55');
 			Time.SetTimeWhenSceneLoaded();
 		}
 		this.Update();
 	}
 	
-	this.Update = function() {
+	this.Update = function() 
+	{
+		// Grid(this.width,this.height,this.sizeCell,"black");
+
+		ctx.beginPath();
+		ctx.strokeStyle = "black";
+		for (var i = 0; i <= this.width; i+=this.sizeCell.x)
+		{
+			ctx.moveTo(i,0);
+			ctx.lineTo(i,this.width);
+			for (var j = 0; j <= this.height; j+=this.sizeCell.y)
+			{
+				if (i == 0) 
+				{
+					ctx.moveTo(0,j);
+					ctx.lineTo(this.height,j);
+				}
+				if (this.obstacles[i / this.sizeCell.x + j /this.sizeCell.y * this.nbCol] == 1 && i != this.width) 
+				{
+					ctx.fillStyle = "black";
+					ctx.fillRect(i,j,this.sizeCell.x,this.sizeCell.y);
+				}
+			}	
+		}
+
+		for (var i = 0; i < this.width; i++) 
+		{
+			for (var j = 0; j < this.height; j++)
+			{
+				if (i == this.startPoint && j == this.startPoint) 
+				{
+					ctx.fillStyle = "green";
+					ctx.fillRect(i,j,this.sizeCell.x,this.sizeCell.y);
+				}
+				if (i == this.endPoint && j== this.endPoint) 
+				{
+					ctx.fillStyle = "red";
+					ctx.fillRect(i,j,this.sizeCell.x,this.sizeCell.y);
+				}
+			} 
+		}	
+		ctx.stroke();
+		ctx.closePath();
+
+		var path = new PathFinding(this.obstacles,this.nbCol,this.nbline);
+		var result = path.Process();
+
+		for (var i = 0; i < result.length; i++) 
+		{
+			for (var j = 0; j < result.length; j++) 
+			{
+				
+				ctx.fillStyle = "blue";
+				ctx.fillRect(result[i],result[j],this.sizeCell.x,this.sizeCell.y);
+			}
+		}
+			
+
+
+
+		if (Input.MouseClick) 
+		{
+			console.log("Case X : " + Math.floor(Input.MousePosition.x / this.sizeCell.x) + " Case Y : " + Math.floor(Input.MousePosition.y / this.sizeCell.y))
+		
+		}
+
 		if (!Application.GamePaused) {
 			for (var i = 0; i < this.GameObjects.length; i++) {
 				//this.GameObjects[i].Start();
 			}
-			
-			ctx.beginPath();
-			ctx.strokeStyle = "black";
-			for (var i = 0; i <= 700; i+=100)
-			{
-				ctx.moveTo(i,0);
-				ctx.lineTo(i,700);
-				for (var j = 0; j <= 700; j+=100)
-				{
-					if (i == 0) 
-					{
-						ctx.moveTo(0,j);
-						ctx.lineTo(700,j);
-					}
-					if (this.obstacles[i / 100 + j /100 * 7] == 1 && i != 700) 
-					{
-						ctx.fillStyle = "black";
-						ctx.fillRect(i,j,100,100);
-					}
-				}	
-			}
-			
-				ctx.stroke();
-				ctx.closePath();
-
-
-				if (Input.MouseClick) 
-				{
-					console.log("Case X : " + Math.floor(Input.MousePosition.x / 100) + " Case Y : " + Math.floor(Input.MousePosition.y / 100))
-				}
-
-
 
 		}
 		this.GUI();
-		
-		
 		
 	}
 	this.GUI = function() {

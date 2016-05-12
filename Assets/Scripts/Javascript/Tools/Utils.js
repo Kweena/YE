@@ -36,3 +36,15 @@ CanvasRenderingContext2D.prototype.RoundedBox = function(x,y,w,h,r)
     this.closePath();
     this.fill();
 };
+
+function IndexFromCoord(x,y,col)
+{   
+    return y * col + x;
+}
+
+function CoordFromIndex (i,col)
+{
+    var x = i % col;
+    var y = (i - x) / col;
+    return new Vector(x,y);
+}
