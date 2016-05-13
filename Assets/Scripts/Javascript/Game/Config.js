@@ -1,3 +1,10 @@
+/**
+ * Represents a book.
+ * @constructor
+ * @param {string} title - The title of the book.
+ * @param {string} author - The author of the book.
+ * @return {object} Object1 - The first object
+ */
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
 // canvas.style.background = 'red';

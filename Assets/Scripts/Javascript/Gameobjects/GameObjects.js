@@ -199,7 +199,7 @@ function GameObject() {
 
 				var scaledSizeX = this.that.size.x*this.that.scale.x;
 				var scaledSizeY = this.that.size.y*this.that.scale.y;
-				//console.log(this);
+				
 				ctx.drawImage(this.Material.Source,
 								this.Material.CurrentFrame.x,
 								this.Material.CurrentFrame.y,
@@ -227,32 +227,55 @@ function GameObject() {
 	};
 
 
-	this.Awake = function() {
+	this.Awake = function() 
+	{
 		console.log('%c System:GameObject ' + this.name + " Created !", 'background:#222; color:#b00b55');
 	};
-	this.Start = function() {
-		if (!this.started) {
+
+	this.Start = function() 
+	{
+		if (!this.started) 
+		{
 			// operation start
 
 			this.started = true;
 			console.log('%c System:GameObject ' + this.name + " Started !", 'background:#222; color:#bada55');
 		}
-		this.Update();
+		this.PreUpdate();
 	};
-	this.Update = function() {
-		if ( this.enabled ) {
 
+	this.PreUpdate = function() 
+	{
+		if (this.enabled ) //le code a faire avant cette frame
+		{
+			
+			this.Update();
 		}
-		this.GUI();	
+	
 	};
-	this.GUI = function() {
+
+	this.Update = function ()
+	{
+		this.PreUpdate();
+	};
+
+	this.PostUpdate = function()
+	{
+		this.GUI();
+	};
+
+	this.GUI = function() 
+	{
 		
 	}
-	this.onHover = function() {
+	this.onHover = function() 
+	{
 		this.Physics.countHovered ++;
+	}
 		
 	}
-	this.onClicked = function() {
+	this.onClicked = function() 
+	{
 		this.Physics.countHovered ++;
 	}
 	this.onUnHovered = function() {

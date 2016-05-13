@@ -39,30 +39,37 @@
 *
 *	To load your scene, use this instruction: "Application.LoadLevel(LevelName)".
 */
-function SceneTest() {
-	this.name = "SceneTest";
+function GroupeGoScene() {
+	this.name = "GroupeGoScene";
 	this.GameObjects =[];
-	this.count = 0;
-	this.power = 15;
+	this.Groups = [];
 
 	this.started = false;
 
+
 	this.Awake = function() {
-		// console.clear();
+		console.clear();
 		console.log('%c System:Scene ' + this.name + " Created !", 'background:#222; color:#bada55');
 
 	}
 	this.Start = function() {
 		if (!this.started) {
 			Time.SetTimeWhenSceneBegin();
+			
 			// operation start
 
-			this.GameObjects.push(new GoTest());
-			this.GameObjects.push(new GoTest1());
-			this.GameObjects.push(new GoTest2());
-			this.GameObjects.push(new GoCible());
-
 			
+			var g = new Group("testGroup", new Vector(50,50) );
+			var g2 = new Group("testGroup2", new Vector(500,300) );
+			g2.AddGameObject(g);
+			this.Groups.push(g2);
+			g.Transform.relativeScale = new Vector(0.75,0.75);
+			g2.Transform.relativeScale = new Vector(0.75,0.75);
+			g.AddGameObject(new Child(0,0));
+			g.AddGameObject(new Child(100,0));
+
+			this.GameObjects.push(new Child(1200,300));
+			this.GameObjects.push(new GoTest(canvas.width/3,canvas.height/2));
 
 			this.started = true;
 			console.log('%c System:Scene ' + this.name + " Started !", 'background:#222; color:#bada55');
@@ -72,62 +79,28 @@ function SceneTest() {
 	}
 	this.Update = function() {
 		if (!Application.GamePaused) {
-
-			ctx.fillStyle = '#5F71A5';
-			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			for (var i = 0; i < this.GameObjects.length; i++) {
 				this.GameObjects[i].Start();
 			}
+			for (var i = 0; i < this.Groups.length; i++) {
+				this.Groups[i].Start();
+			}
+		}
 
-			var text = "Would you tell me , please , where I have to go from here ? Much depends on where you want to go . I care not the place ... In this case, regardless of the route you will take ."
 
-			Dialogue.Begin(text,5,400,400,"white","Georgia");
+		// var camera = new Camera(canvas.width,canvas.height);
+		// camera.MoveOnX(39);
 
-			console.log(Dialogue.interval)
-			console.clear();
 
-			console.log(Dialogue.words)
-			console.log(Dialogue.letters)
-			this.GUI();
-			
-		// 	//GFX
-		// 	if (this.count % this.power == 0) 
-		// 	{
-		// 		var affectedZone = {
-		// 		x : 0,
-		// 		y : 0,
-		// 		w : canvas.width,
-		// 		h : canvas.height
-		// 		};
-
-		// 		Gfx.Filter.Flash(affectedZone,1,"white");
-
-		// 	}
-			
-		// 	this.count ++;
-		// }
-		
+		this.GUI();
 	}
-}
-	this.GUI = function() 
-	{
-		if (!Application.GamePaused) 
-		{
-			if (Dialogue.finished) 
-			{
-				Dialogue.interrupted = false;
-			}	
-			else
-			{
-				Dialogue.Continue();
-			}	
-		} 
-		else 
-		{
+	this.GUI = function() {
+		if (!Application.GamePaused) {
+			//Show UI
+		} else {
 			// Show pause menu
 		}
 	}
 
-	this.Awake();
-
+	this.Awake()
 }

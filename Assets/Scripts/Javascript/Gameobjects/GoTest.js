@@ -138,6 +138,7 @@ function GoTest(x,y) {
 	this.enabled = true;
 	this.started = false;
 	this.rendered = true;
+	this.speed = 2;
 	
 	this.Transform = {};
 	this.Transform.position = new Vector();
@@ -250,8 +251,51 @@ function GoTest(x,y) {
 		if ( this.enabled ) 
 		{
 			this.Renderer.Draw();
+		}	
 
-		}
+		// if (Input.KeysDown[39]) 
+		// {
+		// 	this.Transform.position.x += this.speed;
+		// }
+		// else
+		// {
+		// 	this.speed = 0;
+		// } 
+		
+		// if (Input.KeysDown[38]) 
+		// {
+		// 	this.Transform.position.y -= this.speed;
+		// }
+		// else
+		// {
+		// 	this.speed = 0;
+		// } 
+
+		// if (Input.KeysDown[37]) 
+		// {
+		// 	this.Transform.position.x -= this.speed;
+		// }
+		// else
+		// {
+		// 	if (!Input.KeysDown[39]) 
+		// 	{
+		// 		this.speed = 0;
+		// 	}
+			
+		// } 
+		
+		// if (Input.KeysDown[40]) 
+		// {
+		// 	this.Transform.position.y += this.speed;
+		// }
+		// else
+		// {
+		// 	if (!Input.KeysDown[38]) 
+		// 	{
+		// 		this.speed = 0;
+		// 	}
+
+		// } 
 		this.GUI();	
 	};
 	this.GUI = function() {

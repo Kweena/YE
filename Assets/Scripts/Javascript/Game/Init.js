@@ -52,8 +52,8 @@ function ImageLoaded(imageLoaded) {
 	console.log('%c System: ' + imageLoaded + " Loaded !", 'background:#222; color:#10ADED');
 				// Here? for wait the download of loader
 				console.log(Application.LoadedScene);
-	Scenes["GridScene"] = new GridScene();
-	Application.LoadedScene = Scenes["GridScene"];
+	Scenes["GroupeGoScene"] = new GroupeGoScene();
+	Application.LoadedScene = Scenes["GroupeGoScene"];
 				console.log(Application.LoadedScene);
 	
 
